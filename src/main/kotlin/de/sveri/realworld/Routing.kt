@@ -23,16 +23,21 @@ fun Route.api() {
 
         val gson = GsonBuilder().create()
 
-            intercept(ApplicationCallPipeline.Infrastructure) { call ->
-        if (call.request.acceptItems().any { it.value == "application/json" }) {
-            call.transform.register<JsonResponse> { value ->
-                TextContent(gson.toJson(value.data), ContentType.Application.Json)
+        intercept(ApplicationCallPipeline.Infrastructure) { call ->
+            if (call.request.acceptItems().any { it.value == "application/json" }) {
+                call.transform.register<JsonResponse> { value ->
+                    TextContent(gson.toJson(value.data), ContentType.Application.Json)
+                }
             }
         }
-    }
 
         post("users/login") {
-            call.respondText("Hello, wasdfasdf!")
+            call.respondText("login")
+        }
+
+        post("users") { body ->
+            println(body.parameters)
+            call.respondText("register")
         }
 
         get("user") {
