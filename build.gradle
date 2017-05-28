@@ -68,6 +68,8 @@ dependencies {
     testCompile 'junit:junit:4.11'
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 
+    testCompile "com.beust:klaxon:0.30"
+
     testCompile "org.jetbrains.ktor:ktor-test-host:$ktor_version"
 
 }
